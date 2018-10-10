@@ -1,0 +1,24 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="HawkHunt:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/HawkHunt_war_exploded</output-path>
+    <root id="archive" name="HawkHunt_war exploded.war">
+      <element id="javaee-facet-resources" facet="HawkHunt/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="HawkHunt" />
+          <element id="dir-copy" path="$PROJECT_DIR$/jars/mdl" />
+          <element id="dir-copy" path="$PROJECT_DIR$/jars/mdl-selectfield-master" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="HawkHunt" />
+          <element id="file-copy" path="$PROJECT_DIR$/jars/jtidy-r938/jtidy-r938.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/jars/jwi-2.2.3.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/jars/itextpdf-5.5.9.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/jars/postgresql-42.1.4.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/jars/la4j-0.6.0.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/jars/json-simple-1.1.1.jar" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

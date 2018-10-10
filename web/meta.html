@@ -1,0 +1,83 @@
+<!--
+<%&#45;&#45;Created by IntelliJ IDEA.
+User: Praveen Kashyap
+Date: 11/14/2017
+Time: 8:20 PM
+To change this template use File | Settings | File Templates.&#45;&#45;%>
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>-->
+
+<html>
+<head>
+    <title>Meta Search Engine</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+</head>
+<style>
+    .form {
+        padding-top: 5%;
+        padding-left: 30%
+    }
+    .topright {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+</style>
+
+
+<body>
+<div class="form">
+    <form action="MetaServlet" method="get" id="servletclass">
+        <div>
+            <img src="metasearch.gif" alt="Cannot load image" width="500" height="200">
+        </div>
+        <br>
+        <a href="configuration.jsp" class="topright">Configuration</a>
+        <div style="padding-left: 75px">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ">
+                <input class="mdl-textfield__input" type="text" name="query" id="query">
+                <label class="mdl-textfield__label" for="query">Search Query...</label>
+            </div>
+            <br>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ">
+                <input class="mdl-textfield__input" min="1" max="20" pattern="-?[0-9]*(\.[0-9]+)?" type="number" id="k"
+                       name="k">
+                <label class="mdl-textfield__label" for="k">Number of Documents to Display</label>
+                <span class="mdl-textfield__error">Input should be a number between 1 and 20!</span>
+            </div>
+            <br>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <select class="mdl-textfield__input" id="score" name="score">
+                    <option value="1">TF-IDF</option>
+                    <option value="2">OKAPI BM25</option>
+                    <option value="3">Page Rank & BM 25</option>
+                </select>
+                <label class="mdl-textfield__label" for="score">score</label>
+            </div>
+           <!-- <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="tfidf">
+                <input type="radio" id="tfidf" class="mdl-radio__button" name="score" value="1" checked>
+                <span class="mdl-radio__label">TF-IDF</span>
+            </label> &nbsp;&nbsp;
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="okapi">
+                <input type="radio" id="okapi" class="mdl-radio__button" name="score" value="2">
+                <span class="mdl-radio__label">OKAPI BM25</span>
+            </label> &nbsp;&nbsp;
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="pagerankbm">
+                <input type="radio" id="pagerankbm" class="mdl-radio__button" name="score" value="3">
+                <span class="mdl-radio__label">Page Rank & BM 25</span>
+            </label><br><br>-->
+
+        </div>
+        <div style="padding-left: 20%">
+            <input type="submit"
+                   class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                   value="META SEARCH" id="Search" name="Search">
+            </input>
+        </div>
+    </form>
+</div>
+</body>
+</html>

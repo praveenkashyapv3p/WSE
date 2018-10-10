@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <servlet>
+        <servlet-name>Jsonservlet</servlet-name>
+        <servlet-class>servlet.Jsonservlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Jsonservlet</servlet-name>
+        <url-pattern>/json</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Resultservlet</servlet-name>
+        <servlet-class>servlet.Resultservlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Resultservlet</servlet-name>
+        <url-pattern>/result</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Adservlet</servlet-name>
+        <servlet-class>servlet.Adservlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Adservlet</servlet-name>
+        <url-pattern>/advert</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdBudget</servlet-name>
+        <servlet-class>servlet.AdBudget</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdBudget</servlet-name>
+        <url-pattern>/adBudget</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>configServlet</servlet-name>
+        <servlet-class>servlet.configServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>configServlet</servlet-name>
+        <url-pattern>/config</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MetaServlet</servlet-name>
+        <servlet-class>servlet.MetaServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MetaServlet</servlet-name>
+        <url-pattern>/MetaServlet</url-pattern>
+    </servlet-mapping>
+
+</web-app>

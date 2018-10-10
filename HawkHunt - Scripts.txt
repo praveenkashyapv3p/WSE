@@ -1,0 +1,147 @@
+--drop scripts
+DROP VIEW IF EXISTS features_tfidf;
+DROP VIEW IF EXISTS features_bm25;
+DROP VIEW IF EXISTS features_cmbscr;
+DROP TABLE IF EXISTS metadata;
+DROP TABLE IF EXISTS links;
+DROP TABLE IF EXISTS documents;
+DROP TABLE IF EXISTS crawlqueue;
+DROP TABLE IF EXISTS features;
+DROP TABLE IF EXISTS t_dictionary;
+DROP TABLE IF EXISTS shingles;
+DROP TABLE IF EXISTS jaccardsim;
+DROP TABLE IF EXISTS content;
+DROP TABLE IF EXISTS snippet;
+DROP TABLE IF EXISTS signature;
+DROP TABLE IF EXISTS images;
+DROP TABLE IF EXISTS img_features;
+
+--create table scripts
+CREATE TABLE IF NOT EXISTS shingles (
+  id      INTEGER,
+  shingle TEXT
+);
+CREATE TABLE IF NOT EXISTS crawlqueue (
+  id           SERIAL NOT NULL CONSTRAINT crawlqueue_pkey PRIMARY KEY,
+  url          TEXT,
+  crawl_status TEXT,
+  level        INTEGER,
+  parent_doc   INTEGER
+);
+CREATE TABLE IF NOT EXISTS documents (
+  docid           INTEGER NOT NULL CONSTRAINT documents_pkey PRIMARY KEY,
+  url             TEXT,
+  crawled_on_date TEXT,
+  lang            TEXT,
+  page_rank       DOUBLE PRECISION
+);
+CREATE TABLE IF NOT EXISTS features (
+  docid            INTEGER NOT NULL,
+  term             TEXT    NOT NULL,
+  term_frequency   INTEGER NOT NULL,
+  tf               DOUBLE PRECISION,
+  idf              DOUBLE PRECISION,
+  score            DOUBLE PRECISION,
+  okapi_score      DOUBLE PRECISION,
+  pgrn_okapi_score DOUBLE PRECISION,
+  CONSTRAINT features_pkey PRIMARY KEY (docid, term)
+);
+CREATE TABLE IF NOT EXISTS jaccardsim (
+  docid1    INTEGER,
+  docid2    INTEGER,
+  jacardsim DOUBLE PRECISION,
+  jaccard1  DOUBLE PRECISION,
+  jaccard4  DOUBLE PRECISION,
+  jaccard16 DOUBLE PRECISION,
+  jaccard32 DOUBLE PRECISION
+);
+CREATE TABLE IF NOT EXISTS links (
+  from_docid INTEGER,
+  to_docid   INTEGER
+);
+CREATE TABLE IF NOT EXISTS metadata (
+  author      TEXT,
+  description TEXT,
+  keyword     TEXT
+);
+CREATE TABLE IF NOT EXISTS t_dictionary (
+  id          SERIAL NOT NULL,
+  plainword   TEXT,
+  stemmedword TEXT
+);
+CREATE TABLE IF NOT EXISTS signature AS (
+SELECT  id, md5hashval  FROM ( SELECT id,md5hashval,row_number() OVER (
+PARTITION BY id ORDER BY md5hashval ASC ) seq  FROM shingles) d  WHERE seq <= 32 ORDER BY id ASC);
+CREATE TABLE report (
+  average       DOUBLE PRECISION,
+  median        DOUBLE PRECISION,
+  firstquartile DOUBLE PRECISION,
+  thrdquartile  DOUBLE PRECISION
+);
+CREATE TABLE IF NOT EXISTS signature AS (
+  SELECT id,md5hashval FROM (
+        SELECT id,md5hashval,row_number() OVER (PARTITION BY id ORDER BY md5hashval ASC ) seq FROM shingles) d
+WHERE seq <= 1 ORDER BY id ASC);
+create table IF NOT EXISTS content
+(
+  docid integer,
+  title text,
+  content text
+)
+;
+;
+create table IF NOT EXISTS snippet
+(
+  docid integer,
+  term text,
+  snippet text
+)
+;
+
+
+
+
+--index scripts
+CREATE INDEX features_index
+  ON features (docid, term);
+CREATE INDEX doc_index
+  ON documents (docid);
+CREATE INDEX queue_index
+  ON crawlqueue (to_tsvector('english' :: REGCONFIG, url));
+CREATE INDEX IF NOT EXISTS features_index
+  ON features USING GIN (to_tsvector('english', term), docid);
+CREATE INDEX IF NOT EXISTS features_index
+  ON features USING GIN (to_tsvector('english', term));
+
+--extension script
+CREATE EXTENSION IF NOT EXISTS fuzzystrmatch;
+
+--md5 to integer fucntion
+CREATE FUNCTION h_int(TEXT)
+  RETURNS INT AS $$
+SELECT ('x' || substr(md5($1), 1, 8)) :: BIT(32) :: INT;
+$$ LANGUAGE SQL;
+
+--average:
+UPDATE jaccardsim AS jacrd
+SET average = (jacrd.jaccard1 + jacrd.jaccard4 + jacrd.jaccard16 + jacrd.jaccard32) / 4 FROM jaccardsim AS jac
+WHERE jacrd.docid1 = jac.docid1 AND jacrd.docid2 = jac.docid2;
+
+--first quartile for jaccard1
+UPDATE jaccardsim SET firstquartilejaccard1= ((jaccard1 - jacardsim)) / 4
+FROM jaccardsim a, jaccardsim b
+WHERE a.docid1 = b.docid1 AND a.docid2 = b.docid2;
+-- third quartile for jaccard1
+update jaccardsim set thirdquartilejaccard32=  (3 * ((jaccard32 - jacardsim) )) / 4;
+SELECT (3 * ((a.jaccard1 - a.jacardsim))) / 4
+FROM jaccardsim a, jaccardsim b
+WHERE a.docid1 = b.docid1 AND a.docid2 = b.docid2;
+
+--median
+UPDATE jaccardsim
+SET median = "+median+"
+WHERE docid1 = "+docid1+" AND docid2 = "+docid2+";
+
+--alter password
+ALTER ROLE postgres WITH PASSWORD 'postgres';
+

@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="HawkHunt">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/jars/jtidy-r938/jtidy-r938.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jars/itextpdf-5.5.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jars/la4j-0.6.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jars/jwi-2.2.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jars/json-simple-1.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jars/javax.servlet-3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jars/postgresql-42.1.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

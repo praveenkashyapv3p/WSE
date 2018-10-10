@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Advertisement</title>
+    <style>
+        td {
+            padding-left: 50px;
+        }
+
+        th {
+            padding-left: 20px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+</head>
+<body>
+<form action="advert" method="get">
+    <table>
+        <thead>
+        <tr>
+            <th align="left"><b>Enter your advertisement details</b></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ">
+                    <input class="mdl-textfield__input" required type="text" name="adName" id="adName">
+                    <label class="mdl-textfield__label " for="adName">Full Name...</label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ">
+                    <input class="mdl-textfield__input" required type="text"
+                           pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="adEmail"
+                           id="adEmail" maxlength="200"><label class="mdl-textfield__label" for="adEmail">E-Mail
+                    Address</label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ">
+                    <input class="mdl-textfield__input" required type="text" name="adTitle" id="adTitle"
+                           maxlength="200">
+                    <label class="mdl-textfield__label" for="adTitle">Advertisement Title</label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ">
+                    <input class="mdl-textfield__input" required type="url"
+                           pattern="^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}"
+                           name="adUrl" id="adUrl"/>
+                    <label class="mdl-textfield__label" for="adUrl">Advertisement URL</label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ">
+                    <input class="mdl-textfield__input" required type="text" name="adText" id="advertText">
+                    <label class="mdl-textfield__label" for="advertText">Advertisement Text</label>
+                </div>
+            </td>
+            <td>
+                <div id="texttt" class="icon material-icons">information</div>
+                <div class="mdl-tooltip" for="texttt">
+                    This will be displayed below your advertisement
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <textarea class="mdl-textfield__input" required type="text" name="adTags" id="adTags"></textarea>
+                    <label class="mdl-textfield__label" for="adTags">Advertisement Tags</label>
+                </div>
+            </td>
+            <td>
+                <div id="tagtt" class="icon material-icons">information</div>
+                <div class="mdl-tooltip" for="tagtt">
+                    These tags will be used as search keywords for your advertisement
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <label class="mdl-textfield__label" for="adTags">Cost per click : €0.01</label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" required type="number" min="1" name="adBudget" id="adBudget"
+                           pattern="-?[0-9]*(\.[0-9]+)?">
+                    <label class="mdl-textfield__label" for="adBudget">Advertisement Budget</label>
+                    <span class="mdl-textfield__error">Input is not a number!</span>
+                </div>
+            </td>
+            <td>
+                <div id="budgettt" class="icon material-icons">information</div>
+                <div class="mdl-tooltip" for="budgettt">
+                    Maximum amount you are willing to spen on your adertisement<br> Once budget exceeds, your
+                    advertisement will not be shown
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="url" name="adImage" id="adImage">
+                    <label class="mdl-textfield__label" for="adImage">Advertisement Image</label>
+                </div>
+            </td>
+            <td>
+                <div id="imagett" class="icon material-icons">information</div>
+                <div class="mdl-tooltip" for="imagett">
+                    Optional. please provide the URL of your image(or LOGO) to display instead of title
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                    Register
+                </button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                        onclick="window.location.href='index.html'" id="Cancel">Cancel
+                </button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                        type="reset">
+                    Reset
+                </button>
+            </td>
+        </tr>
+        `
+        </tbody>
+    </table>
+</form>
+</body>
+</html>
